@@ -11,9 +11,9 @@
             "g": 255,
             "b": 255
         },
-        "width": 120,
-        "heigth": 140,
-        "size": 6,
+        "width": 125,
+        "heigth": 125,
+        "size": 8,
         "charmap": ""
     },
     "create_paste_div":{

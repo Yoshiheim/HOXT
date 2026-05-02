@@ -20,7 +20,7 @@
             <h6 id="logo" style="color: rgb({{RGB2String .data.Logo.Color}}); font-size:{{.data.Logo.Size}}px; line-height: .6;">{{Escape .logo}}</h6>
             {{if .data.Name}}
                 <h1 style="text-align: center;">
-                    {{Escape .data.Name.Text}}
+                    [{{Escape .data.Name.Text}}]
                 </h1>
             {{end}}
         {{else}}
@@ -34,21 +34,20 @@
                 <div>
                 	{{range .data.Description.Text}}
             	        <h4 style="font-size: {{$.data.Description.Size}}px;">{{Escape .}}</h4>
-        	        {{end}}	
-				</div>
+        	        {{end}}</div>
 			{{end}}
         {{end}}
 
 
-                <h3>  
         {{if .data.CreatorsGithub}}
-                    <a href='https://github.com/{{.data.CreatorsGithub}}'>Created By {{Escape .data.CreatorsGithub}} :3</a>
-                </h3>
+            <h3>
+                <a href='https://github.com/{{.data.CreatorsGithub}}'>Created By {{Escape .data.CreatorsGithub}} :3</a>
+            </h3>
         {{end}}
         
     
     </div>
-    <div style="background-color: rgb(40, 40, 50);">
+    <div style="background-color: rgb(70, 70, 80);">
         {{if not .data.PasteDiv.Hide }}    
                 <h2>🠋  [Create Paste Here]  🠋</h2>    
                 {{template "attr"}}
@@ -62,7 +61,7 @@
                     <div style="padding: 10px;" class="topic">
                         <a href="/topic/{{.ID}}">/{{.Name}}</a> - <strong style="font-size:18px;">{{.PostCount}} pastes</strong>
                         <div>
-                            <small style="color:rgb(188, 188, 188);">{{.Description}}</small>
+                            <small style="color:rgb(188, 188, 188);"><a href="/topic/{{.ID}}">{{.Description}}</a></small>
                         </div>
                     </div>
                 {{else}}

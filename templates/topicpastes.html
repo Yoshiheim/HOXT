@@ -6,52 +6,48 @@
     <link rel="stylesheet" href="/static/style.css">
     <title>Topic.</title>
 </head>
-<body style="background-color: rgb(40, 40, 50);">    
-    <div id="create">
-        Title:
-        <textarea id="title" class="inputs" maxlength="128" style="resize:none;" rows="4" cols="30" required></textarea>
-        <div>
-        Content:
-        <textarea id="content" class="inputs" maxlength="65536" style="resize:none;" rows="40" cols="90" required></textarea>
-        </div>
-        Username of Creator:
-        <textarea id="author" class="inputs" maxlength="128" style="resize:none;" rows="2" cols="70" required></textarea>
-        
-        <div>
-            <button onclick="FetchData('{{.id}}', true)">Create Paste</button>
-        </div>
+<body style="background-color: rgb(70, 70, 80); text-align: center;">    
+    <h1>[CREATE PASTE]</h1>
+    <div>
+        <textarea placeholder="Title" id="title" class="inputs" maxlength="128" style="resize:none;" rows="2" cols="70" required></textarea>
     </div>
     <div>
+        <textarea placeholder="Content" id="content" class="inputs" maxlength="65536" style="resize:none;" rows="40" cols="70" required></textarea>
+    </div>
+    <div>
+        <textarea placeholder="Username of Creator..." id="author" class="inputs" maxlength="128" style="resize:none;" rows="2" cols="70" required></textarea>            
+    </div>
+    <div>
+        <button onclick="FetchData(1, true)">Create Paste</button>
+    </div>
     <h2>
         [[/{{.topic.Name}}]]
     </h2>
 
-    <div>
-        {{if .temp }}
-            [PASTES] - [ALL PASTES ARE DELETED AFTER {{.temp}}]
-        {{else}}
-            [PASTES]
-        {{end}}
-        {{range .pastes}}
-            <div id="pastes">
-                ID:{{.ID}}
-                <a href="/paste/{{.ID}}" class="links">{{CutString .Title 100}}</a>
-                <small class="authors">[{{CutString .Author 70}}]</small>
-                {{if .IsTitled}}
-                    (Pinned)
-                {{end}}
-                {{if DestroySpaces (CutString .Content 250) }}
-                	<div class="code">
-						<code>{{CutString (Escape .Content) 250}}</code>
-					</div>
-				{{end}}
-            </div>
-        {{else}}
-            <div> 
-                No pastes have been made :(
-            </div>
-        {{end}}
-    </div>
+    {{if .temp }}
+        [ALL PASTES ARE DELETED AFTER {{.temp}}]
+    {{else}}
+        [PASTES]
+    {{end}}
+    {{range .pastes}}
+        <div style="text-align: left;">
+            ID:{{.ID}}
+            <a href="/paste/{{.ID}}" class="links">{{CutString .Title 100}}</a>
+            <small class="authors">[By {{CutString .Author 70}}]</small>
+            {{if .IsTitled}}
+                (Pinned)
+            {{end}}
+            {{if DestroySpaces (CutString .Content 150) }}
+                <pre style="background-color: rgba(130, 140, 150, 0.363);">{{CutString .Content 150}}</pre>
+            {{else}}
+                <strong>...</strong>
+            {{end}}
+        </div>
+    {{else}}
+        <div> 
+            No pastes have been made :(
+        </div>
+    {{end}}
     <script src="/static/attr.js"></script>
 </body>
 </html>

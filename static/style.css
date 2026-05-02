@@ -18,20 +18,13 @@ body {
     user-select: none;
 }
 
-textarea {
-    border: none;
-    background-color: rgb(53, 53, 53);
-    color: white;
-    white-space: pre-wrap;
-}
-
 button{
     font-size: 17px;
     font-weight: 500;
     padding: 10px;
     border: none;
     color: rgb(255, 255, 255);
-    background-color: rgb(90, 90, 130);
+    background-color: rgb(110, 120, 130);
 }
 button:hover {
     background-color: #2fa5f4;
@@ -48,7 +41,7 @@ div{
 }
 
 a {
-    color: rgb(188, 200, 188)
+    color: rgb(140, 160, 178);
 }
 
 .pas{
@@ -65,23 +58,23 @@ a {
 
 .inputs{
     border: none;
-    background-color: rgb(60, 60, 80);
+    background-color: rgb(90, 90, 100);
+    border-radius: 2px;
     color: white;
     white-space: pre-wrap;
 }
 
 .pastes{
     padding: 10px;
-    text-align: center;
+    text-align: left;
 }
 
 .code {
     display: flex;
     background-color: rgb(31, 31, 34);
-    width: 50%;
     border: solid 1px rgb(188, 200, 188);
     padding: 1rem;
-    gap: 2rem   ; 
+    gap: 2rem; 
 }
 
 @media (max-width: 800px) {
@@ -107,6 +100,6 @@ a {
 }
 
 #create{
-    text-align: center;
+    text-align:left;
     margin: 40px;
 }
