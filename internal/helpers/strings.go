@@ -17,6 +17,13 @@ func TruncateByte(s string, maxBytes int) string {
 	return string(s[:maxBytes])
 }
 
+func CheckSizeString(s string, maxBytes int) bool {
+	if len(s) >= maxBytes { // len() returns byte count
+		return true
+	}
+	return false
+}
+
 // this function doesn't work like I want.
 func SanitizeString(s string) string {
 	result := make([]rune, 0, len(s))

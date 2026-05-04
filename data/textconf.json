@@ -17,7 +17,7 @@
         "charmap": ""
     },
     "create_paste_div":{
-        "hide": false,
+        "hide": true,
         "for_topic_index": 1
     },
     "description": {

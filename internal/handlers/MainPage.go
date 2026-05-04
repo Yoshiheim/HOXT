@@ -51,7 +51,7 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 		tops[i].Description = html.EscapeString(tops[i].Description)
 	}
 
-	tpl, err := template.New("index.html").Funcs(helpers.FuncMap).ParseFiles("./templates/index.html", "./templates/attr.html")
+	tpl, err := template.New("index.html").Funcs(helpers.FuncMap).ParseFiles("./templates/index.html", "./templates/attr.html", "./templates/search.html")
 	if err != nil {
 		http.Error(w, "Error With File", http.StatusInternalServerError)
 		return

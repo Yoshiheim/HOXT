@@ -7,6 +7,10 @@ body {
 
 }
 
+#search {
+    text-align: center;
+}
+
 #logo {
     font-size: 1px;
     white-space: pre;
@@ -23,8 +27,6 @@ button{
     font-weight: 500;
     padding: 10px;
     border: none;
-    color: rgb(255, 255, 255);
-    background-color: rgb(110, 120, 130);
 }
 button:hover {
     background-color: #2fa5f4;
@@ -62,6 +64,10 @@ a {
     border-radius: 2px;
     color: white;
     white-space: pre-wrap;
+}
+
+.finded {
+    background-color: rgb(60, 60, 70);
 }
 
 .pastes{
