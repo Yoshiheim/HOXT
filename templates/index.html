@@ -52,13 +52,17 @@
 
         {{template "search"}}
 
-        <div class="pas"><strong>[Pastes]</strong></div>
+        {{if .timer}}
+            <div class="pas"><strong>WARNING: Delete ALL Pastes Every {{.timer}}!</strong></div>
+        {{else}}
+            <div class="pas"><strong>[Pastes]</strong></div>
+        {{end}}
         {{range .pastes}}
             {{if .IsTitled}}
                 <div class="pas" style="background-color: rgba(218, 165, 32, 0.35);">
-                    {{Escape (CutString .Author 64)}} - (Pinned)
+                    {{Escape (CutString .Author 128)}} - (Pinned)
                     <a href="/paste/{{.ID}}">
-                        {{Escape (CutString .Title 64)}}
+                        {{Escape (CutString .Title 128)}}
                     </a>    
                 </div>
             {{else}}

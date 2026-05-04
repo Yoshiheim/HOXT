@@ -23,7 +23,6 @@ type Config struct {
 		Description    Descriptions   `json:"description"`      // Array of string as Description of pastebin
 		CreatorsGithub string         `json:"creators_github"`  // Like to Your Github like "https://github.com/<CreatorsGithub>"
 	*/
-	Topics []Topic `json:"topics"` // All set topic of website
 	Pastes []Paste `json:"pastes"` // All set paste of website
 
 	// ect.
@@ -37,7 +36,7 @@ type Config struct {
 }
 
 type DynamicConfig struct {
-	Name           NameOfWebsite         `json:"name"`             // Name of Pastebinn
+	Name           NameOfWebsite  `json:"name"`             // Name of Pastebinn
 	Logo           LogoCfg        `json:"logo"`             // embed ASCII art as logo to website
 	PasteDiv       CreatePasteDiv `json:"create_paste_div"` // Configs for div for created pastes on index page
 	Description    Descriptions   `json:"description"`      // Array of string as Description of pastebin
@@ -46,7 +45,7 @@ type DynamicConfig struct {
 
 type NameOfWebsite struct {
 	Text string `json:"text"`
-	Size int `json:"size"` 
+	Size int    `json:"size"`
 }
 
 type LenOfPaste struct {
@@ -99,21 +98,10 @@ type ClearTimer struct {
 	//Temp        time.Duration `json:"tick"`
 }
 
-// Wanna make DB topic without inconvenience??!?/!/!??!
-// Its should solve it.
-// But i CANT make feature for update date when configs.json updated,
-// so i you want change it, will delete you DB file :(
-type Topic struct {
-	Name        string `json:"name"`
-	Description string `json:"descr"`
-}
-
-// SAME SHIT LIKE I SAID ON Topic!!11!!!!
 type Paste struct {
-	Title      string `json:"title"`   // paste's title
-	Content    string `json:"content"` // and you know it
-	TopicIndex uint   `json:"topic_index"`
-	IsTitled   bool   `json:"is_titled"`
+	Title    string `json:"title"`   // paste's title
+	Content  string `json:"content"` // and you know it
+	IsTitled bool   `json:"is_titled"`
 }
 
 // var of configs from config.json file

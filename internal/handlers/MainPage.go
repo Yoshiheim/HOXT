@@ -81,6 +81,7 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 	if err := tpl.Execute(w, map[string]any{
 		"data":   cfg,
 		"logo":   string(data.Logo),
+		"timer":  data.Configs.ClearTimer.Temp,
 		"pastes": pastes,
 	}); err != nil {
 		log.Println(err.Error())

@@ -1,34 +1,16 @@
 {
     "port": "8080",
     "host": "127.0.0.1",
-    "topics": [
-        {
-            "name": "index",
-            "descr": "General topic for pasting anything."
-        },
-        {
-            "name": "asciiart",
-            "descr": "For creatibe people, i made this topic to post your ascii arts. :3"
-        },
-        {
-            "name": "code",
-            "descr": "Share and Paste code of any programming languages here."
-        },
-        {
-            "name": "selfpromo",
-            "descr": "Promote your stuff or anything else under this topic."
-        },
-        {
-            "name": "guides",
-            "descr": "If you want to post guides, this is the topic for you."
-        }
-    ],
     "pastes": [
         {
             "title": "MAIN PASTE + LINK TO SOURCE CODE",
             "content": "Created by Yoshiheim(https://github.com/Yoshiheim)\nSource code: https://github.com/Yoshiheim/MyPastebin.txt\nPlease do not http-flood this, and have fun! :3",
-            "is_titled": true,
-            "topic_index": 1
+            "is_titled": true
+        },
+        {
+            "title": "PASTEBIN RULES!!!",
+            "content": "NO MORE DOXXING - Its joke clone of pastebin, please be respectful.\n",
+            "is_titled": true
         }
     ],
     "paste_lens":{
