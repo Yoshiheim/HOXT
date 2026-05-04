@@ -24,7 +24,7 @@
     "db_filename": "data.db",
     "clear_timer": {
         "destroy_pinned": false,
-        "tick": "30(m)"
+        "tick": "0(s)"
     },
     "limit": {
         "limit_time": 4,

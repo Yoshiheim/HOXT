@@ -7,17 +7,13 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div> 
-        <div>
+    <div style="text-align: left;"> 
+        ID:{{.ID}}
+        <strong>{{.Title}}</strong>
+        [Created At: {{ formatDate .CreatedAt }}]
 
-            ID:{{.ID}}
-            <strong>{{.Title}}</strong>
-            [Created At: {{ formatDate .CreatedAt }}]
-            <div>
-            Created By: {{CutString .Author 100}}
-            </div>
-        </div>
-    
+        Created By: {{CutString .Author 100}}
+        
         <pre style="font-size: 15px;">{{.Content}}</pre>
         
         <button onclick="copyText(document.getElementById('content').textContent)">Copy</button>

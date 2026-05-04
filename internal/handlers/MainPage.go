@@ -23,6 +23,20 @@ type TopicWithCount struct {
 // The Index aka '/' path in website.
 // path: 'http://<HOST>:<PORT>/'
 func MainPage(w http.ResponseWriter, r *http.Request) {
+	var err error
+
+	var id uint32
+
+	var preid uint32
+
+	var nextid uint32
+
+	id, preid, nextid, err = helpers.SafeParsePage(r)
+	if err != nil {
+		http.Error(w, "error with args", http.StatusBadRequest)
+		return
+	}
+
 	/*
 		var tops []modules.Topic
 
@@ -36,18 +50,19 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 
 	var pastes []modules.Paste
 
-	var count int64
-	var offset int64
+	page := int(id)
+	limit := 30
+	offset := (page - 1) * limit
 
-	db.DB.Model(&modules.Paste{}).Count(&count)
-
-	if count <= offset {
-		offset = count
-	}
-
-	db.DB.Order("is_titled DESC").Order("created_at DESC").Offset(int(offset)).Limit(40).Find(&pastes)
+	//.Order("is_titled DESC").Order("created_at DESC").
+	act := db.DB.Order("is_titled DESC").
+		Order("created_at DESC").Offset(offset).Limit(limit).Find(&pastes)
 	for i := range pastes {
 		pastes[i].Title = html.EscapeString(pastes[i].Title)
+	}
+	if act.Error != nil {
+		http.Error(w, "DB Error", http.StatusInternalServerError)
+		return
 	}
 
 	/*var tops []TopicWithCount
@@ -72,7 +87,7 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 
 	cfg := data.GetDConfig(w)
 
-	tpl, err := template.New("index.html").Funcs(helpers.FuncMap).ParseFiles("./templates/index.html", "./templates/attr.html", "./templates/search.html")
+	tpl, err := template.New("index.html").Funcs(helpers.FuncMap).ParseFiles("./templates/index.html", "./templates/attr.html", "./templates/search.html", "./templates/interface.html")
 	if err != nil {
 		http.Error(w, "Error With File", http.StatusInternalServerError)
 		return
@@ -81,8 +96,10 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 	if err := tpl.Execute(w, map[string]any{
 		"data":   cfg,
 		"logo":   string(data.Logo),
-		"timer":  data.Configs.ClearTimer.Temp,
+		"timer":  helpers.Dest,
 		"pastes": pastes,
+		"preid":  preid,
+		"nextid": nextid,
 	}); err != nil {
 		log.Println(err.Error())
 		http.Error(w, "Cant Parse File", http.StatusInternalServerError)

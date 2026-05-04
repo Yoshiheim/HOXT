@@ -1,8 +1,6 @@
 package helpers
 
 import (
-	"strings"
-	"unicode"
 	"unicode/utf8"
 )
 
@@ -18,24 +16,13 @@ func TruncateByte(s string, maxBytes int) string {
 }
 
 func CheckSizeString(s string, maxBytes int) bool {
-	if len(s) >= maxBytes { // len() returns byte count
+	if utf8.RuneCountInString(s) >= maxBytes { // len() returns byte count
 		return true
 	}
 	return false
 }
 
-// this function doesn't work like I want.
-func SanitizeString(s string) string {
-	result := make([]rune, 0, len(s))
-
-	for _, r := range s {
-		if unicode.IsPrint(r) || r == '\n' || r == '\t' {
-			result = append(result, r)
-		}
-	}
-	return string(result)
-}
-
+/*
 func DestroySpaces(text string) string {
 	text = strings.ReplaceAll(text, "\t", "")
 	text = strings.ReplaceAll(text, "\n", "")
@@ -43,4 +30,38 @@ func DestroySpaces(text string) string {
 	text = strings.ReplaceAll(text, "⠀", "")
 	text = strings.ReplaceAll(text, " ", "")
 	return text
+}
+*/
+
+func DestroySpaces(s string) string {
+	var b []rune
+
+	for _, r := range s {
+		switch r {
+		case '\n', '\t', '\b', ' ', '⠀':
+			continue
+		default:
+			if r >= 32 && r <= 126 && r != '\n' && r != '\t' && r != '\b' && r != ' ' {
+				b = append(b, r)
+			}
+		}
+	}
+	return string(b)
+}
+
+func OnlyASCII(s string) string {
+	var b []rune
+
+	for _, r := range s {
+		switch r {
+		case '\n', '\t':
+			b = append(b, r)
+		default:
+			if r >= 32 && r <= 126 { // printable ASCII
+				b = append(b, r)
+			}
+		}
+	}
+
+	return string(b)
 }

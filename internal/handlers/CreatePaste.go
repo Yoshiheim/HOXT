@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"errors"
 	"hoxt/data"
 	"hoxt/internal/db"
 	"hoxt/internal/helpers"
@@ -10,8 +9,6 @@ import (
 	"html"
 	"net/http"
 	"unicode/utf8"
-
-	"gorm.io/gorm"
 )
 
 /*
@@ -86,9 +83,9 @@ func CreatePaste(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// escape all content
-	body.Title = html.EscapeString(helpers.TruncateByte(body.Title, data.Configs.PasteLens.TitleLen))
-	body.Content = html.EscapeString(helpers.TruncateByte(body.Content, data.Configs.PasteLens.ContentLen))
-	body.Author = html.EscapeString(helpers.ToASCII(helpers.TruncateByte(helpers.DestroySpaces(body.Author), data.Configs.PasteLens.AuthorLen)))
+	body.Title = html.EscapeString(helpers.OnlyASCII(helpers.TruncateByte(helpers.DestroySpaces(body.Title), data.Configs.PasteLens.TitleLen)))
+	body.Content = html.EscapeString(helpers.OnlyASCII(helpers.TruncateByte(body.Content, data.Configs.PasteLens.ContentLen)))
+	body.Author = html.EscapeString(helpers.OnlyASCII(helpers.TruncateByte(helpers.DestroySpaces(body.Author), data.Configs.PasteLens.AuthorLen)))
 
 	//Check is 'title' in JSON requet is empty.
 	if helpers.DestroySpaces(body.Title) == "" {
@@ -110,10 +107,6 @@ func CreatePaste(w http.ResponseWriter, r *http.Request) {
 		Author:  body.Author,
 	})
 	if err != nil {
-		if errors.As(err, &gorm.ErrRecordNotFound) {
-			http.Error(w, "this topic to paste does not exist.", http.StatusBadRequest)
-			return
-		}
 		http.Error(w, "we have some problem with database.", http.StatusInternalServerError)
 		return
 	}

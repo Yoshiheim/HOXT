@@ -12,6 +12,9 @@ func UpdateLogo() {
 	if err != nil {
 		fmt.Println(err)
 	}
+	if c.Logo.Hide == true {
+		return
+	}
 	flags := aic_package.DefaultFlags()
 
 	flags.Dimensions = []int{c.Logo.Heigth, c.Logo.Width}

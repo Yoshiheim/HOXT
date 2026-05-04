@@ -17,9 +17,7 @@ var FuncMap = template.FuncMap{
 	"formatDate": func(t time.Time) string {
 		return t.Format("Monday, Jan 2, 2006 15:04:05")
 	},
-	"Escape": func(text string) string {
-		return html.EscapeString(text)
-	},
+	"Escape":    html.EscapeString,
 	"CutString": TruncateByte,
 	"JoinEscape": func(text []string) string {
 		var s []string
@@ -28,18 +26,11 @@ var FuncMap = template.FuncMap{
 		}
 		return strings.Join(s, "\n")
 	},
-	"Sub": func(a, b int) int {
-		return a - b
-	},
-	"Rand": func(a int) int {
-		return rand.Intn(a)
-	},
+	"Rand": rand.Intn,
 	"RGB2String": func(r data.RGB) string {
 		return fmt.Sprintf("%s,%s,%s", strconv.Itoa(r.R), strconv.Itoa(r.G), strconv.Itoa(r.B))
 	},
-	"DestroySpaces": func(s string) string {
-		return DestroySpaces(s)
-	},
+	"DestroySpaces": DestroySpaces,
 	"Split": func(s string) []string {
 		return strings.Split(s, "\n")
 	},

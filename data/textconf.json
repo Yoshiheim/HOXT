@@ -4,7 +4,7 @@
     	"size": 45
     },
     "logo": {
-        "hide": false,
+        "hide": true,
         "path": "./data/icon.png",
         "color": {
             "r": 255,

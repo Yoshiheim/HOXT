@@ -16,13 +16,13 @@ import (
 func Local(w http.ResponseWriter, r *http.Request) {
 	parts := strings.Split(r.URL.Path, "/")
 	if len(parts) < 3 {
-		http.Error(w, "No topic id", http.StatusBadRequest)
+		http.Error(w, "No paste id", http.StatusBadRequest)
 		return
 	}
 
 	id, err := strconv.Atoi(parts[2])
 	if err != nil {
-		http.Error(w, "Invalid topic id", http.StatusBadRequest)
+		http.Error(w, "Invalid paste id", http.StatusBadRequest)
 		return
 	}
 
@@ -31,7 +31,7 @@ func Local(w http.ResponseWriter, r *http.Request) {
 
 	act := db.DB.Find(&paste, id).Count(&count)
 	if act.Error != nil {
-		log.Println(err.Error())
+		log.Println(act.Error.Error())
 		http.Error(w, act.Error.Error(), http.StatusInternalServerError)
 		return
 	}

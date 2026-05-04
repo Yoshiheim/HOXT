@@ -23,6 +23,18 @@ body {
     user-select: none;
 }
 
+.page{
+    display: inline;
+    
+    background-color: var(--whiteblue);
+    padding: 10px;
+}
+
+.page:nth-of-type(2n){
+    background-color: var(--blackblue);
+}
+
+
 .addp{
   position: fixed;
   top: 0;

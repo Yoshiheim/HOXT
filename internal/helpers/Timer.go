@@ -16,6 +16,9 @@ func Timer() {
 	if err != nil {
 		return
 	}
+	if Dest == 0 {
+		return
+	}
 	fmt.Println("[INIT TIME CLEARER]")
 	go func() {
 		tick := time.NewTicker(Dest)

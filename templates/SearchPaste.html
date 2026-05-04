@@ -12,11 +12,7 @@
     </div>
     <div>
         <div>
-            {{if .keyword}}
-                [PASTES FINDED BY "{{.keyword}}"]
-            {{else}}
-                [PASTES FINDED BY EMPTY WORD]
-            {{end}}
+            [PASTES FINDED BY KEYWORD]
         </div>
         {{if .pastes}}
             {{range .pastes}}
@@ -27,6 +23,14 @@
         {{else}}
             <strong>Not Found</strong>
         {{end}}
+    </div>
+        <div>
+        <h2>
+            <a href="/search?keyword={{.keyword}}&page={{.preid}}" class="page">{{.preid}}</a>
+        </h2>
+        <h2>
+            <a href="/search?keyword={{.keyword}}&page={{.nextid}}" class="page">{{.nextid}}</a>
+        </h2>
     </div>
 </body>
 </html>
