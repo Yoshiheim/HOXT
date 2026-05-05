@@ -34,4 +34,11 @@ var FuncMap = template.FuncMap{
 	"Split": func(s string) []string {
 		return strings.Split(s, "\n")
 	},
+	"seq": func(n int) []int {
+		s := make([]int, n)
+		for i := range s {
+			s[i] = i + 1 // Start from 1 instead of 0
+		}
+		return s
+	},
 }

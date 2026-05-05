@@ -41,6 +41,8 @@ func Local(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	content := helpers.SplitByRunes(paste.Content, 100)
+
 	tpl, err := template.New("local.html").Funcs(helpers.FuncMap).ParseFiles("./templates/local.html")
 	if err != nil {
 		log.Println(err.Error())
@@ -48,7 +50,10 @@ func Local(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := tpl.Execute(w, paste); err != nil {
+	if err := tpl.Execute(w, map[string]any{
+		"paste":   paste,
+		"content": content,
+	}); err != nil {
 		log.Println(err.Error())
 		http.Error(w, "Cant Parse File", http.StatusInternalServerError)
 		return

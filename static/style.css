@@ -35,6 +35,14 @@ body {
 }
 
 
+.count {
+    background-color: var(--pasteblack);
+    padding: 5px;
+}
+.count:nth-of-type(2n){
+    background-color: var(--pastewhite);
+}
+
 .addp{
   position: fixed;
   top: 0;
@@ -71,9 +79,10 @@ a {
 }
 
 .pas{
-    width: 70%;
+    width: 50%;
     background-color: var(--pastewhite);
     display: flex;
+    font-size: 11px;
     flex-direction: column;
     text-align: center;
     border-bottom: solid 1px rgb(80, 80, 90);

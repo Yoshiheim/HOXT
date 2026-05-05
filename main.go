@@ -70,6 +70,8 @@ func main() {
 
 	helpers.MemoryUsageTick()
 
+	helpers.UpdateLogoTick()
+
 	if *hostflag != data.Configs.Host && *portflag == data.Configs.Port {
 
 		fmt.Printf("[HOSTNAME AND PORT FROM FLAGS DOESN'T EQUAL]\n")

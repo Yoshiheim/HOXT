@@ -57,3 +57,18 @@ func OnlyASCII(s string) string {
 
 	return string(b)
 }
+
+func SplitByRunes(s string, size int) []string {
+	runes := []rune(s)
+	var result []string
+
+	for i := 0; i < len(runes); i += size {
+		end := i + size
+		if end > len(runes) {
+			end = len(runes)
+		}
+		result = append(result, string(runes[i:end]))
+	}
+
+	return result
+}

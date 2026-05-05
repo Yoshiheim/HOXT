@@ -26,6 +26,7 @@ type Config struct {
 	Pastes []Paste `json:"pastes"` // All set paste of website
 
 	// ect.
+	UpdateLogoTick       string     `json:"update_logo_tick"`
 	PasteLens            LenOfPaste `json:"paste_lens"` // the limit of texts length in pastes
 	CheckMemoryUsageTick string     `json:"check_memory_usage_tick"`
 	Theme                uint       `json:"theme"`        // its should be for change color in pastebin but its doesn't work at all actually

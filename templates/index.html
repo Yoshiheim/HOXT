@@ -61,7 +61,7 @@
                     </div>
                 {{else}}
                     <div class="pas">
-                        <pre><a href="/paste/{{.ID}}">{{CutString .Title 128}}</a> | {{CutString .Author 128}}</pre>    
+                        <a href="/paste/{{.ID}}">{{CutString .Title 128}}</a> By: {{CutString .Author 128}}    
                     </div>
                 {{end}}
                 
@@ -71,12 +71,9 @@
         {{end}}
     </div>
     <div>
-        <h2>
-            <a href="/?page={{.preid}}" class="page">{{.preid}}</a>
-        </h2>
-        <h2>
-            <a href="/?page={{.nextid}}" class="page">{{.nextid}}</a>
-        </h2>
+        {{range seq .totalPages}}
+            <a href="/?page={{.}}" class="count">{{.}}</a>
+        {{end}}
     </div>
 </body>
 </html>

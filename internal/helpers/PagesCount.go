@@ -39,6 +39,23 @@ func PagesCount(w http.ResponseWriter, r *http.Request, id *uint64, preid, nexti
 	*nextid = uint32(*id + 1)
 }
 
+func ParsePageID(r *http.Request) (id uint32, err error) {
+	pageStr := r.FormValue("page")
+	const defaultPage = 1
+
+	if pageStr == "" {
+		id = defaultPage
+	} else {
+		val, err := strconv.ParseUint(pageStr, 10, 32)
+		if err != nil {
+			return 0, fmt.Errorf("invalid page")
+		}
+		id = uint32(val)
+	}
+
+	return id, nil
+}
+
 func SafeParsePage(r *http.Request) (id, preid, nextid uint32, err error) {
 	const defaultPage = 1
 
@@ -52,6 +69,10 @@ func SafeParsePage(r *http.Request) (id, preid, nextid uint32, err error) {
 			return 0, 0, 0, fmt.Errorf("invalid page")
 		}
 		id = uint32(val)
+	}
+
+	if id == 0 {
+		return 0, 0, 1, nil
 	}
 
 	if id > 1 {

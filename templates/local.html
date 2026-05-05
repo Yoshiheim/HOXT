@@ -8,14 +8,18 @@
 </head>
 <body>
     <div style="text-align: left;"> 
-        ID:{{.ID}}
-        <strong>{{.Title}}</strong>
-        [Created At: {{ formatDate .CreatedAt }}]
+        ID:{{.paste.ID}}
+        <strong>{{.paste.Title}}</strong>
+        [Created At: {{ formatDate .paste.CreatedAt }}]
 
-        Created By: {{CutString .Author 100}}
-        
-        <pre style="font-size: 15px;">{{.Content}}</pre>
-        
+
+        Created By: {{CutString .paste.Author 100}}
+        <div style="text-align: left;">
+            {{range $i, $v := .content}}
+                <pre style="line-height:0.2;">{{$v}}</pre>
+            {{end}}
+        </div>
+
         <button onclick="copyText(document.getElementById('content').textContent)">Copy</button>
     </div>
     <script> 

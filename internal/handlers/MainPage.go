@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"hoxt/data"
 	"hoxt/internal/db"
 	"hoxt/internal/helpers"
@@ -9,29 +10,12 @@ import (
 	"log"
 	"net/http"
 	"text/template"
-	"time"
 )
-
-type TopicWithCount struct {
-	ID          uint
-	Name        string
-	Description string
-	CreatedAt   time.Time
-	PostCount   int
-}
 
 // The Index aka '/' path in website.
 // path: 'http://<HOST>:<PORT>/'
 func MainPage(w http.ResponseWriter, r *http.Request) {
-	var err error
-
-	var id uint32
-
-	var preid uint32
-
-	var nextid uint32
-
-	id, preid, nextid, err = helpers.SafeParsePage(r)
+	id, err := helpers.ParsePageID(r)
 	if err != nil {
 		http.Error(w, "error with args", http.StatusBadRequest)
 		return
@@ -65,6 +49,12 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var count int64
+
+	db.DB.Model(&modules.Paste{}).Count(&count)
+
+	totalPages := (count + int64(limit) - 1) / int64(limit)
+
 	/*var tops []TopicWithCount
 
 	if err := db.DB.
@@ -83,23 +73,21 @@ func MainPage(w http.ResponseWriter, r *http.Request) {
 	}
 	*/
 
-	helpers.UpdateLogo()
-
 	cfg := data.GetDConfig(w)
 
 	tpl, err := template.New("index.html").Funcs(helpers.FuncMap).ParseFiles("./templates/index.html", "./templates/attr.html", "./templates/search.html", "./templates/interface.html")
 	if err != nil {
+		fmt.Println(err.Error())
 		http.Error(w, "Error With File", http.StatusInternalServerError)
 		return
 	}
 
 	if err := tpl.Execute(w, map[string]any{
-		"data":   cfg,
-		"logo":   string(data.Logo),
-		"timer":  helpers.Dest,
-		"pastes": pastes,
-		"preid":  preid,
-		"nextid": nextid,
+		"data":       cfg,
+		"logo":       string(data.Logo),
+		"timer":      helpers.Dest,
+		"pastes":     pastes,
+		"totalPages": int(totalPages),
 	}); err != nil {
 		log.Println(err.Error())
 		http.Error(w, "Cant Parse File", http.StatusInternalServerError)

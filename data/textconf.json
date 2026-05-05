@@ -4,7 +4,7 @@
     	"size": 45
     },
     "logo": {
-        "hide": true,
+        "hide": false,
         "path": "./data/icon.png",
         "color": {
             "r": 255,
@@ -14,7 +14,7 @@
         "width": 120,
         "heigth": 120,
         "size": 6,
-        "charmap": " .,~:;*!&([{@"
+        "charmap": " .,~:;*!&@"
     },
     "create_paste_div":{
         "hide": true,
